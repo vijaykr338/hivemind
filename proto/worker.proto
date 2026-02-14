@@ -1,0 +1,28 @@
+syntax = "proto3";
+package worker;
+
+option go_package = "hivemind/proto;proto";
+
+service WorkerService{
+    rpc RegisterWorker(RegisterRequest) returns (RegisterResponse);
+    rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+}
+
+message RegisterRequest {
+    string worker_id = 1;
+    string worker_hostname = 2;
+    string message = 3;
+}
+
+message RegisterResponse{
+    int32 heartbeat_interval = 1;
+}
+
+message HeartbeatRequest {
+    string worker_id = 1;
+    string worker_hostname = 2;
+}
+
+message HeartbeatResponse {
+  bool ok = 1;
+}
